@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "org.acme.domain";
+option java_outer_classname = "UserProfileProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+service UserProfilesService {
+  rpc FindByUsername(google.protobuf.StringValue) returns (UserProfile) {}
+  rpc FindByEmail(google.protobuf.StringValue) returns (UserProfile) {}
+  rpc FindByNationality(google.protobuf.StringValue) returns (UserProfiles) {}
+  rpc FindAll(google.protobuf.Empty) returns (UserProfiles) {}
+  rpc AddUserProfile(UserProfile) returns (UserProfile) {}
+  rpc DeleteUserProfile(google.protobuf.StringValue) returns (google.protobuf.Empty) {}
+}
+
+message UserProfile {
+  int64 id = 1;
+  string username = 2;
+  string password = 3;
+  string email = 4;
+  string nationality = 5;
+  string phoneNumber = 6;
+  string role = 7;
+}
+
+message UserProfiles {
+  repeated UserProfile UserProfile = 1;
+}
